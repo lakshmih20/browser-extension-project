@@ -1,16 +1,45 @@
-# React + Vite
+# Flow Tracker Browser Extension
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Chrome MV3 side panel extension plus a React app that simulates a user journey across three pages: Instagram feed, Flipkart product, and Payment. The extension tracks the current step and highlights it in the side panel UI.
 
-Currently, two official plugins are available:
+## What this includes
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Vite + React demo app with routes at `/instagram`, `/flipkart`, and `/payment`.
+- Chrome extension (Manifest V3) with a side panel UI and a content script.
+- Step tracking stored in `chrome.storage` and reflected in the side panel.
 
-## React Compiler
+## How it works
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. The React app runs on `http://localhost:5173`.
+2. The content script watches the route and sets `currentStep` in `chrome.storage`.
+3. The side panel reads `currentStep` and highlights the active step.
 
-## Expanding the ESLint configuration
+## Run the demo app
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173/instagram` in Chrome.
+
+## Load the extension
+
+1. Go to `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked** and select the `public/` folder (it contains `manifest.json`).
+4. Click the extension icon to open the side panel.
+
+## Try the flow
+
+Navigate between these routes and watch the side panel update:
+
+- `/instagram`
+- `/flipkart`
+- `/payment`
+
+## Tech stack
+
+- React + Vite
+- Chrome Extensions (Manifest V3)
+
