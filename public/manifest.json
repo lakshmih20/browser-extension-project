@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Flow Tracker",
+  "version": "1.0",
+  "description": "Track multi-website user flow: Instagram → Flipkart → Payment",
+  "permissions": ["storage", "sidePanel"],
+  "host_permissions": ["http://localhost:5173/*"],
+  "action": {
+    "default_title": "Order Flow Tracker"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:5173/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
